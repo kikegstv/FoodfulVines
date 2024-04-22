@@ -1,0 +1,32 @@
+<div class="product-container">
+  <div class="card">
+    <div class="card__header">
+      <h2 class="card__title">Agregar Producto</h2>
+    </div>
+    <div class="card__content">
+      <form [formGroup]="productForm" (ngSubmit)="submitProduct()" class="form">
+        <div class="form__field">
+          <label for="name" class="form__label">Nombre:</label>
+          <input id="name" type="text" formControlName="name" required class="form__input">
+        </div>
+        <div class="form__field">
+          <label for="description" class="form__label">Descripción:</label>
+          <textarea id="description" formControlName="description" class="form__input"></textarea>
+        </div>
+        <div class="form__field">
+          <label for="price" class="form__label">Precio:</label>
+          <input id="price" type="number" formControlName="price" required class="form__input">
+        </div>
+        <div class="form__field">
+          <label for="quantity" class="form__label">Cantidad:</label>
+          <input id="quantity" type="number" formControlName="quantity" required class="form__input">
+        </div>
+        <div class="form__field">
+          <label for="image" class="form__label">Imagen del Producto:</label>
+          <input id="image" type="file" (change)="handleFileInput($event)" class="form__input">
+        </div>
+        <button type="submit" class="button button-primary" [disabled]="!productForm.valid">Agregar Producto</button>
+      </form>
+    </div>
+  </div>
+</div>

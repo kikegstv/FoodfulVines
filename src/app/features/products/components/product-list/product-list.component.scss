@@ -1,0 +1,27 @@
+.product-list-container {
+  width: 800px;
+  &__details {
+    &__img {
+      width: 140px;
+    }
+    &__description {
+      width: 380px
+    }
+  }
+  &__actions {
+    width: 180px;
+    &__buttons {
+      &__button {
+        width: 30px;
+        height: 30px;
+      }
+    }
+  }
+}
+
+img {
+  display: block;
+  max-height: 90px;
+  border-radius: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}

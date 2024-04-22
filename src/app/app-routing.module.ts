@@ -4,7 +4,8 @@ import { LoginComponent } from './features/auth/login/login.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'feature', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) }
+  { path: 'feature', loadChildren: () => import('./features/auth/auth.module').then(m => m.AuthModule) },
+  { path: 'products', loadChildren: () => import('./features/products/products.module').then(m => m.ProductsModule) }
 ];
 
 @NgModule({

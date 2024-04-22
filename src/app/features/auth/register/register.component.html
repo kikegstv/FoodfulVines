@@ -1,1 +1,40 @@
-<p>register works!</p>
+<div class="register-container">
+    <div class="card">
+      <div class="card__header">
+        <h2 class="card__title">Registrarse</h2>
+      </div>
+      <div class="card__content">
+        <form [formGroup]="registerForm" class="form">
+          <div class="form__field">
+              <label class="form__label">Correo electrónico</label>
+              <input formControlName="email" type="email" placeholder="Ej. juan.perez@ejemplo.com" required class="form__input" />
+          </div>
+  
+          <div class="form__field">
+              <label class="form__label">Contraseña</label>
+              <input formControlName="password" type="password" placeholder="Ingresa tu contraseña" required class="form__input" />
+          </div>
+  
+          <div class="form__field">
+              <label class="form__label">Confirmar contraseña</label>
+              <input formControlName="confirmPassword" type="password" placeholder="Confirma tu contraseña" required class="form__input" />
+          </div>
+  
+          <div class="form__field">
+              <label class="form__label">Nombres</label>
+              <input formControlName="firstName" type="text" placeholder="Tu nombre" required class="form__input" />
+          </div>
+  
+          <div class="form__field">
+              <label class="form__label">Apellidos</label>
+              <input formControlName="lastName" type="text" placeholder="Tus apellidos" required class="form__input" />
+          </div>
+  
+          <div class="register-container__form-button-group">
+              <button type="button" class="button button-primary">Registrarse</button>
+              <button type="button" class="button button-secondary">Login</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,18 @@
+@import "../../../../variables.scss";
+
+.register-container {
+    display: flex;
+    width: 500px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+
+    &__form-button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+
+  }
