@@ -1,4 +1,4 @@
-<button class="button button-primary" (click)="showModal()">Agregar producto</button>
+<button  class="button button-primary" (click)="showModal()">Agregar producto</button>
 <ng-container *ngFor="let product of (productList$ | async)">
   <div class="product-list-container mt-1 mb-1">
     <div class="card w-100">
@@ -16,7 +16,7 @@
 
        <div class="product-list-container__actions">
           <p>{{product.price | currency}}</p>
-          <div class="product-list-container__actions__buttons mt-1 flex flex-justify-start">
+          <div  class="product-list-container__actions__buttons mt-1 flex flex-justify-start">
             <img class="product-list-container__actions__buttons__button" src="/assets/icons/actions/edit.svg" alt="">
             <img class="product-list-container__actions__buttons__button ml-1" src="/assets/icons/actions/delete.svg" alt="">
           </div>

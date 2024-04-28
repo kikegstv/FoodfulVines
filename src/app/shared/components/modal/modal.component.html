@@ -2,7 +2,7 @@
   <div class="modal__content" (click)="$event.stopPropagation()">
     <ng-content></ng-content>
     <div class="modal__content__button__container">
-      <img class="modal__close-button" src="/assets/icons/actions/close.svg" alt="">
+      <img (click)="close()" class="modal__close-button" src="/assets/icons/actions/close.svg" alt="">
     </div>
   </div>
 </div>

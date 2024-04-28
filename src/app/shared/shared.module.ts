@@ -5,13 +5,15 @@ import { FooterComponent } from './components/footer/footer.component';
 import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalComponent } from './components/modal/modal.component';
+import { RoleDirective } from './directives/role.directive';
 
 @NgModule({
   declarations: [
     NavbarComponent,
     FooterComponent,
     SpinnerComponent,
-    ModalComponent
+    ModalComponent,
+    RoleDirective
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { ModalComponent } from './components/modal/modal.component';
     NavbarComponent,
     FooterComponent,
     SpinnerComponent,
-    ModalComponent
+    ModalComponent,
+    RoleDirective
   ]
 })
 export class SharedModule { }

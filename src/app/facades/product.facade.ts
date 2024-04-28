@@ -9,14 +9,11 @@ import { Product } from '../features/products/models/products.model';
 @Injectable({ providedIn: 'root' })
 
 export class ProductFacade {
-
-  public loadingPage$: Observable<boolean>;
   public productData$: Observable<Product[] | null>;
 
   constructor(private _store: Store) {
-    this.loadingPage$ = this._store.select(productSelectors.selectLoadingPage);
     this.productData$ = this._store.select(
-      productSelectors.selectTodos
+      productSelectors.selectProduct
     );
   }
 

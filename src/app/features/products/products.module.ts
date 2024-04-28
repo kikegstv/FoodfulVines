@@ -7,13 +7,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
+import { ProductCartComponent } from './components/product-cart/product-cart.component';
 
 
 @NgModule({
   declarations: [
     ProductsComponent,
     ProductFormComponent,
-    ProductListComponent
+    ProductListComponent,
+    ProductCartComponent
   ],
   imports: [
     CommonModule,

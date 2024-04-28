@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { NgxSpinnerService, Spinner } from 'ngx-spinner';
-import { ProductFacade } from '../../../facades/product.facade';
 import { Observable, Subscription } from 'rxjs';
+import { CommonFacade } from '../../../facades/common.facade';
 
 @Component({
     selector: 'app-spinner',
@@ -9,8 +9,9 @@ import { Observable, Subscription } from 'rxjs';
     styleUrl: './spinner.component.scss',
 })
 export class SpinnerComponent implements OnInit {
+    @Input() isVisible: boolean = false;
     public isLoadingSubs!: Subscription
-    public isLoading$: Observable<boolean> = this.productFacade.loadingPage$;
+    public isLoading$: Observable<boolean> = this.commonFacade.loadingPage$;
 
     private spinnerConfig: Spinner = {
         type: 'ball-scale-multiple',
@@ -21,10 +22,12 @@ export class SpinnerComponent implements OnInit {
         zIndex: 9999,
     };
 
-    constructor(private spinner: NgxSpinnerService, private productFacade: ProductFacade) {}
+    constructor(
+        private spinner: NgxSpinnerService,
+        private commonFacade: CommonFacade
+    ) {}
 
     ngOnInit() {
-        console.log("Spinner")
         this.isLoadingSubs = this.isLoading$.subscribe((isLoading: boolean) => {
             if (isLoading) {
                 this.spinner.show(undefined, this.spinnerConfig);

@@ -1,89 +1,76 @@
 import { createReducer, on, Action } from '@ngrx/store';
-import * as todoActions from './product.actions';
+import * as productActions from './product.actions';
 import { ProductState } from './product.state';
 
 export const initialAuthState: ProductState = {
   productData: null,
-  isLoadingPage: false,
 };
 
 const _productReducer = createReducer(
   initialAuthState,
-  on(todoActions.getProducts, (state) => {
+  on(productActions.getProducts, (state) => {
     return {
       ...state,
-      isLoadingPage: true,
     };
   }),
-  on(todoActions.successGetProducts, (state, { productData }) => {
+  on(productActions.successGetProducts, (state, { productData }) => {
     return {
       ...state,
       productData,
-      isLoadingPage: false,
     };
   }),
-  on(todoActions.failureGetProducts, (state, { error }) => {
+  on(productActions.failureGetProducts, (state, { error }) => {
     return {
       ...state,
       error,
-      isLoadingPage: false,
     };
   }),
-  on(todoActions.createProducts, (state) => {
+  on(productActions.createProducts, (state) => {
     return {
       ...state,
-      isLoadingPage: true,
     };
   }),
-  on(todoActions.successCreateProducts, (state) => {
+  on(productActions.successCreateProducts, (state) => {
     return {
       ...state,
-      isLoadingPage: false,
     };
   }),
-  on(todoActions.failureCreateProducts, (state, { error }) => {
+  on(productActions.failureCreateProducts, (state, { error }) => {
     return {
       ...state,
       error,
-      isLoadingPage: false,
     };
   }),
-  on(todoActions.updateProducts, (state) => {
+  on(productActions.updateProducts, (state) => {
     return {
       ...state,
-      isLoadingPage: true,
     };
   }),
-  on(todoActions.successUpdateProducts, (state) => {
+  on(productActions.successUpdateProducts, (state) => {
     return {
       ...state,
-      isLoadingPage: false,
     };
   }),
-  on(todoActions.failureUpdateProducts, (state, { error }) => {
+  on(productActions.failureUpdateProducts, (state, { error }) => {
     return {
       ...state,
       error,
-      isLoadingPage: false,
     };
   }),
-  on(todoActions.deleteProducts, (state) => {
+  on(productActions.deleteProducts, (state) => {
     return {
       ...state,
-      isLoadingPage: true,
     };
   }),
-  on(todoActions.successDeleteProducts, (state) => {
+  on(productActions.successDeleteProducts, (state) => {
     return {
       ...state,
-      isLoadingPage: false,
     };
   }),
-  on(todoActions.failureDeleteProducts, (state, { error }) => {
+  on(productActions.failureDeleteProducts, (state, { error }) => {
     return {
       ...state,
       error,
-      isLoadingPage: false,
     };
   }),
 
