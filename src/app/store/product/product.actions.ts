@@ -16,3 +16,6 @@ export const failureUpdateProducts = createAction('[Product API] FailureUpdatePr
 export const deleteProducts = createAction('[Product Page] deleteProducts', props<{ productId: string }>());
 export const successDeleteProducts = createAction('[Product API] SuccessDeleteProducts');
 export const failureDeleteProducts = createAction('[Product API] FailureDeleteProducts', props<{ error: any }>());
+
+//product detail
+export const getProductDetail = createAction('[Product Page] GetProductDetail', props<{ product: Product | null }>());

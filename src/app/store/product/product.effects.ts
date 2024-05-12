@@ -6,13 +6,15 @@ import * as ProductActions from './product.actions';
 import { ProductsService } from '../../features/products/services/products.service';
 import { Product } from '../../features/products/models/products.model';
 import { CommonFacade } from '../../facades/common.facade';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class ProductEffects {
     constructor(
         private _actions$: Actions,
         private _productService: ProductsService,
-        private _commonFacade: CommonFacade
+        private _commonFacade: CommonFacade,
+        private _router: Router
     ) {}
 
     getTodos$ = createEffect(() =>
@@ -91,6 +93,18 @@ export class ProductEffects {
                 )
             )
         )
+    );
+
+    getProductDetail$ = createEffect(() =>
+        this._actions$.pipe(
+            ofType(ProductActions.getProductDetail),
+            tap((_) => {
+                console.log("Here")
+                this._router.navigate(['/products/product-details']);
+                console.log("Here end")
+            }),
+        ),
+        { dispatch: false }
     );
 
     onProductProccess$ = createEffect(

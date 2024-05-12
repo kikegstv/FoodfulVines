@@ -5,6 +5,8 @@ import { ProductsComponent } from './products.component';
 import { ProductFormComponent } from './components/product-form/product-form.component';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { AuthGuard } from '../../core/guards/auth.guard';
+import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { ProductCartComponent } from './components/product-cart/product-cart.component';
 
 const routes: Routes = [
     {
@@ -14,6 +16,12 @@ const routes: Routes = [
         children: [
             {
                 path: 'product-list', component: ProductListComponent,
+            },
+            {
+                path: 'product-details', component: ProductDetailComponent,
+            },
+            {
+                path: 'product-cart', component: ProductCartComponent,
             },
             { path: '', redirectTo: 'product-list', pathMatch: 'full' },
         ],

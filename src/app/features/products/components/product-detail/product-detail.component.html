@@ -1,0 +1,30 @@
+<div class="product-detail card">
+  <div class="card__header">
+    <h2 class="card__title">{{ product.name }}</h2>
+  </div>
+  <div class="product-detail__content">
+    <div class="product-detail__content__label">
+      <img class="product-detail__content__img" [src]="product.imageUrl" alt="{{ product.name }}"/>
+      <p class="product-detail__content__description">{{ product.description }}</p>
+    </div>
+    <div class="card__content product-detail__content__cart">
+      <p><strong>Precio:</strong> ${{ product.price }}</p>
+      <div class="form">
+        <div class="form__field">
+          <label for="quantity" class="form__label">Cantidad:</label>
+          <input
+            type="number"
+            id="quantity"
+            class="form__input"
+            [(ngModel)]="quantity"
+            (change)="onQuantityChange($event)"
+            min="1"
+          />
+        </div>
+        <button class="button button-primary" (click)="addToCart()">
+          Agregar al Carrito
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

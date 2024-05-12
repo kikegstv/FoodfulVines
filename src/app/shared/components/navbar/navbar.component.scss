@@ -20,6 +20,22 @@
 
 .nav-item {
   margin-left: 10px;
+  position: relative;
+  &__icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }
+  &__cart-count {
+    position: absolute;
+    top: -2px;
+    right: -3px;
+    background: blue;
+    border-radius: 1rem;
+    width: 20px;
+    height: 20px;
+    text-align: center;
+  }
 }
 
 .nav-link {

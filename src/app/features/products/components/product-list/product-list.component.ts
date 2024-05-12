@@ -14,12 +14,20 @@ export class ProductListComponent implements OnInit {
     public isModalVisible: boolean = false;
     public productList$!: Observable<Product[] | null>;
 
-    constructor(private _productFacade: ProductFacade, private productService: ProductsService) {}
+    constructor(
+        private _productFacade: ProductFacade,
+        private productService: ProductsService
+    ) {}
 
     ngOnInit(): void {
         console.log('Product List Component initialized');
         this._productFacade.getProductData();
         this.productList$ = this._productFacade.productData$;
+    }
+
+    getProductDetails(product: Product): void {
+        console.log('Product Detail', product)
+        this._productFacade.getProductDetail(product);
     }
 
     showModal(): void {

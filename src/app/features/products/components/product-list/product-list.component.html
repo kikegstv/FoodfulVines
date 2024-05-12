@@ -1,7 +1,7 @@
 <button  class="button button-primary" (click)="showModal()">Agregar producto</button>
 <ng-container *ngFor="let product of (productList$ | async)">
   <div class="product-list-container mt-1 mb-1">
-    <div class="card w-100">
+    <div class="card w-100" (click)="getProductDetails(product)">
       <div class="card__content flex flex-justify-between pr-0 pl-0 w-100">
         <div class="product-list-container__details flex flex-justify-between">
           <div class="product-list-container__details__img flex flex-justify-center mr-1">
@@ -9,7 +9,7 @@
           </div>
           <div>
             <h4>{{product.name}}</h4>
-            <p class="product-list-container__details__description">Cantidad disponible: {{product.quantity}} </p>
+            <p class="product-list-container__details__quantity">Cantidad disponible: {{product.quantity}} </p>
             <p>{{product.description}} </p>
          </div>
         </div>
