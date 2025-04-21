@@ -4,7 +4,7 @@
       <h2 class="card__title">Agregar Producto</h2>
     </div>
     <div class="card__content">
-      <form [formGroup]="productForm" (ngSubmit)="submitProduct()" class="form">
+      <form [formGroup]="productForm" (ngSubmit)="submitProduct()" class="form" autocomplete="off">
         <div class="form__field">
           <label for="name" class="form__label">Nombre:</label>
           <input id="name" type="text" formControlName="name" required class="form__input">
@@ -15,7 +15,17 @@
         </div>
         <div class="form__field">
           <label for="price" class="form__label">Precio:</label>
-          <input id="price" type="number" formControlName="price" required class="form__input">
+          <div class="price-input-container">
+            <span class="currency-symbol">$</span>
+            <input id="price" type="text"
+              formControlName="price" mask="separator.0"
+              thousandSeparator="."
+              (input)="formatPrice($event)"
+              [dropSpecialCharacters]="true"
+              required
+              class="form__input price-input"
+            >
+          </div>
         </div>
         <div class="form__field">
           <label for="quantity" class="form__label">Cantidad:</label>

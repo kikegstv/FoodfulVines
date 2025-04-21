@@ -24,7 +24,9 @@
     "@ngrx/store": "^17.2.0",
     "@ngrx/store-devtools": "^17.2.0",
     "firebase": "^10.11.0",
+    "ngx-mask": "^16.0.0",
     "ngx-spinner": "^16.0.2",
+    "ngx-toastr": "^19.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

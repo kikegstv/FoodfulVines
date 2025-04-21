@@ -10,5 +10,20 @@ export const getCommonFeatureState: MemoizedSelector<object, CommonState> =
 
 export const selectLoadingPage = createSelector(
     getCommonFeatureState,
-    (state: CommonState) => state?.isLoadingPage
+    (state: CommonState) => state.isLoadingPage
+);
+
+export const selectAllModals = createSelector(
+    getCommonFeatureState,
+    (state: CommonState) => state.modals
+);
+
+export const selectModalState = (modalId: string) => createSelector(
+    selectAllModals,
+    (modals) => modals[modalId] ? modals[modalId].isOpen : false
+);
+
+export const selectModalData = (modalId: string) => createSelector(
+    selectAllModals,
+    (modals) => modals[modalId] ? modals[modalId].data : undefined
 );

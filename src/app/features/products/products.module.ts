@@ -9,6 +9,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductCartComponent } from './components/product-cart/product-cart.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
+import { NgxMaskDirective } from 'ngx-mask';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { ProductDetailComponent } from './components/product-detail/product-deta
     ProductsRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    NgxMaskDirective
   ]
 })
 export class ProductsModule { }

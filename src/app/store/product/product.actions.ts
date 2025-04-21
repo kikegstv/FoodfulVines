@@ -8,6 +8,7 @@ export const failureGetProducts = createAction('[Product API] FailureGetProducts
 export const createProducts = createAction('[Product Page] createProducts', props<{ product: Product, file: File }>());
 export const successCreateProducts = createAction('[Product API] SuccessCreateProducts');
 export const failureCreateProducts = createAction('[Product API] FailureCreateProducts', props<{ error: any }>());
+export const resetProductForm = createAction('[Product Form] ResetProductForm');
 
 export const updateProducts = createAction('[Product Page] updateProducts', props<{ product: Product }>());
 export const successUpdateProducts = createAction('[Product API] SuccessUpdateProducts');

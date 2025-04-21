@@ -1,0 +1,13 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /products/{fileName} {
+      // Permitir escritura a cualquiera (para solucionar el error de permisos)
+      allow write: if true;
+
+      // Cualquiera puede leer los productos
+      allow read: if true;
+    }
+  }
+}
