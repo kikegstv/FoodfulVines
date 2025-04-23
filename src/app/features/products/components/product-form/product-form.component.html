@@ -1,7 +1,7 @@
 <div class="product-container">
   <div class="card">
     <div class="card__header">
-      <h2 class="card__title">Agregar Producto</h2>
+      <h2 class="card__title">{{ isEditMode ? 'Editar Producto' : 'Agregar Producto' }}</h2>
     </div>
     <div class="card__content">
       <form [formGroup]="productForm" (ngSubmit)="submitProduct()" class="form" autocomplete="off">
@@ -34,8 +34,13 @@
         <div class="form__field">
           <label for="image" class="form__label">Imagen del Producto:</label>
           <input id="image" type="file" (change)="handleFileInput($event)" class="form__input">
+          <div *ngIf="imagePreview" class="form__image-preview mt-1">
+            <img [src]="imagePreview" alt="Vista previa" style="max-width: 200px; max-height: 200px;">
+          </div>
         </div>
-        <button type="submit" class="button button-primary" [disabled]="!productForm.valid">Agregar Producto</button>
+        <button type="submit" class="button button-primary" [disabled]="!productForm.valid">
+          {{ isEditMode ? 'Actualizar Producto' : 'Agregar Producto' }}
+        </button>
       </form>
     </div>
   </div>
