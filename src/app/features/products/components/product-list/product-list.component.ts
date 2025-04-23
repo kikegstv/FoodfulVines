@@ -15,8 +15,10 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductListComponent implements OnInit, OnDestroy {
     public productSubs!: Subscription;
     public isModalVisible: boolean = false;
+    public isConfirmationModalVisible: boolean = false;
     public productList$!: Observable<Product[] | null>;
     private modalSubs: Subscription = new Subscription();
+    private productToDelete: string | undefined;
 
     public MODAL_IDS = MODAL_IDS;
 
@@ -36,6 +38,12 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this.modalSubs.add(
             this.commonFacade.getModalState(this.MODAL_IDS.CREATE_PRODUCT).subscribe(isOpen => {
                 this.isModalVisible = isOpen;
+            })
+        );
+
+        this.modalSubs.add(
+            this.commonFacade.getModalState(this.MODAL_IDS.CONFIRMATION_MODAL).subscribe(isOpen => {
+                this.isConfirmationModalVisible = isOpen;
             })
         );
     }
@@ -58,5 +66,23 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     closeModal(): void {
         this.commonFacade.closeModal(MODAL_IDS.CREATE_PRODUCT);
+    }
+
+    confirmDelete(event: Event, product: Product): void {
+        event.stopPropagation(); // Prevenir navegación al detalle del producto
+        this.productToDelete = product.id;
+        this.commonFacade.openModal(MODAL_IDS.CONFIRMATION_MODAL);
+    }
+
+    deleteProduct(): void {
+        if (this.productToDelete) {
+            this._productFacade.deleteProductData(this.productToDelete);
+            this.productToDelete = undefined;
+        }
+        this.closeConfirmationModal();
+    }
+
+    closeConfirmationModal(): void {
+        this.commonFacade.closeModal(MODAL_IDS.CONFIRMATION_MODAL);
     }
 }

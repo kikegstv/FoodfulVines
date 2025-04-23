@@ -1,9 +1,28 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 export interface ModalConfig {
   id: string;
   data?: any;
+}
+
+export class ModalRef {
+  private _result = new Subject<any>();
+  private _modalId: string;
+
+  constructor(modalId: string, private modalService: ModalService) {
+    this._modalId = modalId;
+  }
+
+  close(result?: any): void {
+    this._result.next(result);
+    this._result.complete();
+    this.modalService.closeModal(this._modalId);
+  }
+
+  get result(): Observable<any> {
+    return this._result.asObservable();
+  }
 }
 
 @Injectable({
@@ -12,6 +31,7 @@ export interface ModalConfig {
 export class ModalService {
   private modalsState = new BehaviorSubject<{ [key: string]: boolean }>({});
   private modalData = new Map<string, any>();
+  private modalRefs = new Map<string, ModalRef>();
 
   constructor() { }
 
@@ -27,13 +47,19 @@ export class ModalService {
     return this.modalsState.asObservable();
   }
 
-  openModal(modalId: string, data?: any): void {
+  openModal(modalId: string, data?: any): ModalRef {
     const currentState = this.modalsState.value;
     this.modalsState.next({ ...currentState, [modalId]: true });
 
     if (data) {
       this.modalData.set(modalId, data);
     }
+
+    if (!this.modalRefs.has(modalId)) {
+      this.modalRefs.set(modalId, new ModalRef(modalId, this));
+    }
+
+    return this.modalRefs.get(modalId)!;
   }
 
   closeModal(modalId: string): void {

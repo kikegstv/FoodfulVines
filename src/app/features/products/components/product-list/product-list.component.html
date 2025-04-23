@@ -16,9 +16,9 @@
 
        <div class="product-list-container__actions">
           <p>{{product.price | currency}}</p>
-          <div  class="product-list-container__actions__buttons mt-1 flex flex-justify-start">
-            <img class="product-list-container__actions__buttons__button" src="/assets/icons/actions/edit.svg" alt="">
-            <img class="product-list-container__actions__buttons__button ml-1" src="/assets/icons/actions/delete.svg" alt="">
+          <div class="product-list-container__actions__buttons mt-1 flex flex-justify-start">
+            <img class="product-list-container__actions__buttons__button" src="/assets/icons/actions/edit.svg" alt="Editar" (click)="$event.stopPropagation()">
+            <img class="product-list-container__actions__buttons__button ml-1" src="/assets/icons/actions/delete.svg" alt="Eliminar" (click)="confirmDelete($event, product)">
           </div>
        </div>
       </div>
@@ -28,5 +28,17 @@
 
 <app-modal [modalId]="MODAL_IDS.CREATE_PRODUCT" [(isVisible)]="isModalVisible">
   <app-product-form></app-product-form>
+</app-modal>
+
+<app-modal [modalId]="MODAL_IDS.CONFIRMATION_MODAL" [(isVisible)]="isConfirmationModalVisible">
+  <app-confirmation-modal
+    [title]="'Eliminar producto'"
+    [message]="'¿Estás seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.'"
+    [confirmText]="'Eliminar'"
+    [cancelText]="'Cancelar'"
+    [confirmButtonType]="'danger'"
+    (confirm)="deleteProduct()"
+    (cancel)="closeConfirmationModal()">
+  </app-confirmation-modal>
 </app-modal>
 
