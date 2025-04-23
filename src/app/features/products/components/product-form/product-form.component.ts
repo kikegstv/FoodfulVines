@@ -35,6 +35,7 @@ export class ProductFormComponent implements OnInit, OnChanges, OnDestroy {
   ngOnInit(): void {
     this.initForm();
     this.listenToResetAction();
+    this.listenToSuccessActions();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -91,6 +92,19 @@ export class ProductFormComponent implements OnInit, OnChanges, OnDestroy {
     );
   }
 
+  private listenToSuccessActions(): void {
+    this.subscription.add(
+      this.actions$.pipe(
+        ofType(
+          ProductActions.successCreateProducts,
+          ProductActions.successUpdateProducts
+        )
+      ).subscribe(() => {
+        this.formSubmitted.emit();
+      })
+    );
+  }
+
   handleFileInput(event: any): void {
     if (event.target.files && event.target.files.length > 0) {
       this.file = event.target.files[0];
@@ -117,23 +131,17 @@ export class ProductFormComponent implements OnInit, OnChanges, OnDestroy {
             next: (imageUrl) => {
               productData.imageUrl = imageUrl;
               this.productFacade.updateProductData(productData);
-              this.toastr.success('¡Producto actualizado con éxito!');
-              this.formSubmitted.emit();
             },
             error: (error) => this.toastr.error('Error al subir la imagen: ' + error)
           });
         } else {
           // Mantener la URL de imagen existente y actualizar el producto
           this.productFacade.updateProductData(productData);
-          this.toastr.success('¡Producto actualizado con éxito!');
-          this.formSubmitted.emit();
         }
       } else {
         // Crear un nuevo producto
         if (this.file) {
           this.productFacade.createProductData(productData, this.file);
-          this.toastr.success('¡Producto agregado con éxito!');
-          this.formSubmitted.emit();
         } else {
           this.toastr.error('Por favor, selecciona una imagen para el producto.');
         }
