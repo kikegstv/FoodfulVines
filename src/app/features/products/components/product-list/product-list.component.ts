@@ -20,6 +20,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
     private modalSubs: Subscription = new Subscription();
     private productToDelete: string | undefined;
 
+    public selectedProduct: Product | null = null;
+    public isEditMode: boolean = false;
     public MODAL_IDS = MODAL_IDS;
 
     constructor(
@@ -31,7 +33,6 @@ export class ProductListComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         console.log('Product List Component initialized');
-        this.toastr.success('Productos cargados correctamente');
         this._productFacade.getProductData();
         this.productList$ = this._productFacade.productData$;
 
@@ -60,12 +61,24 @@ export class ProductListComponent implements OnInit, OnDestroy {
         this._productFacade.getProductDetail(product);
     }
 
-    showModal(): void {
+    showModal(product?: Product): void {
+        if (product) {
+            this.selectedProduct = product;
+            this.isEditMode = true;
+        } else {
+            this.selectedProduct = null;
+            this.isEditMode = false;
+        }
         this.commonFacade.openModal(MODAL_IDS.CREATE_PRODUCT);
     }
 
     closeModal(): void {
         this.commonFacade.closeModal(MODAL_IDS.CREATE_PRODUCT);
+    }
+
+    editProduct(product: Product, event: Event): void {
+        event.stopPropagation();
+        this.showModal(product);
     }
 
     confirmDelete(event: Event, product: Product): void {
@@ -78,6 +91,7 @@ export class ProductListComponent implements OnInit, OnDestroy {
         if (this.productToDelete) {
             this._productFacade.deleteProductData(this.productToDelete);
             this.productToDelete = undefined;
+            this.toastr.success('Producto eliminado correctamente');
         }
         this.closeConfirmationModal();
     }
