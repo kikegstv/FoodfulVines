@@ -1,5 +1,10 @@
 <div class="product-detail card">
   <div class="card__header">
+    <div class="back-button-container">
+      <button class="back-button" (click)="goBack()">
+        <i class="back-arrow">←</i> Volver
+      </button>
+    </div>
     <h2 class="card__title">{{ product.name }}</h2>
   </div>
   <div class="product-detail__content">

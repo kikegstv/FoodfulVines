@@ -7,6 +7,9 @@ import { ProductsService } from '../../features/products/services/products.servi
 import { Product } from '../../features/products/models/products.model';
 import { CommonFacade } from '../../facades/common.facade';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { MODAL_IDS } from '../../core/constants/modal.constants';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class ProductEffects {
@@ -14,7 +17,9 @@ export class ProductEffects {
         private _actions$: Actions,
         private _productService: ProductsService,
         private _commonFacade: CommonFacade,
-        private _router: Router
+        private _router: Router,
+        private _toastr: ToastrService,
+        private _store: Store
     ) {}
 
     getTodos$ = createEffect(() =>
@@ -27,8 +32,8 @@ export class ProductEffects {
                             productData,
                         });
                     }),
-                    catchError((_) => {
-                        const error = { message: 'Ha ocurrido un error' };
+                    catchError((error) => {
+                        this._toastr.error('Error al cargar productos: ' + error.message);
                         return of(ProductActions.failureGetProducts({ error }));
                     })
                 )
@@ -44,13 +49,14 @@ export class ProductEffects {
                     .createProduct(payload.product, payload.file)
                     .pipe(
                         map((_) => {
+                            this._toastr.success('Producto creado correctamente');
+                            this._commonFacade.closeModal(MODAL_IDS.CREATE_PRODUCT);
+                            this._store.dispatch(ProductActions.resetProductForm());
                             return ProductActions.successCreateProducts();
                         }),
-                        catchError((_) => {
-                            const error = { message: 'Ha ocurrido un error' };
-                            return of(
-                                ProductActions.failureCreateProducts({ error })
-                            );
+                        catchError((error) => {
+                            this._toastr.error('Error al crear producto: ' + error.message);
+                            return of(ProductActions.failureCreateProducts({ error }));
                         })
                     )
             )
@@ -63,13 +69,12 @@ export class ProductEffects {
             switchMap((payload) =>
                 this._productService.updateProduct(payload.product).pipe(
                     map((_) => {
+                        this._toastr.success('Producto actualizado correctamente');
                         return ProductActions.successUpdateProducts();
                     }),
-                    catchError((_) => {
-                        const error = { message: 'Ha ocurrido un error' };
-                        return of(
-                            ProductActions.failureUpdateProducts({ error })
-                        );
+                    catchError((error) => {
+                        this._toastr.error('Error al actualizar producto: ' + error.message);
+                        return of(ProductActions.failureUpdateProducts({ error }));
                     })
                 )
             )
@@ -82,13 +87,12 @@ export class ProductEffects {
             switchMap((payload) =>
                 this._productService.deleteProduct(payload.productId).pipe(
                     map((_) => {
+                        this._toastr.success('Producto eliminado correctamente');
                         return ProductActions.successDeleteProducts();
                     }),
-                    catchError((_) => {
-                        const error = { message: 'Ha ocurrido un error' };
-                        return of(
-                            ProductActions.failureDeleteProducts({ error })
-                        );
+                    catchError((error) => {
+                        this._toastr.error('Error al eliminar producto: ' + error.message);
+                        return of(ProductActions.failureDeleteProducts({ error }));
                     })
                 )
             )
@@ -99,9 +103,7 @@ export class ProductEffects {
         this._actions$.pipe(
             ofType(ProductActions.getProductDetail),
             tap((_) => {
-                console.log("Here")
                 this._router.navigate(['/products/product-details']);
-                console.log("Here end")
             }),
         ),
         { dispatch: false }
@@ -117,19 +119,16 @@ export class ProductEffects {
                     ProductActions.deleteProducts
                 ),
                 tap((_) => {
-                    console.log("Start Loading")
                     this._commonFacade.setLoadingPage();
                 })
             ),
         { dispatch: false }
     )
 
-    //successGetProducts
     successGetProducts$ = createEffect(() =>
         this._actions$.pipe(
             ofType(ProductActions.successGetProducts),
             tap((_) => {
-                console.log("Stop Loading")
                 this._commonFacade.unsetLoadingPage();
             }),
         ),
@@ -144,7 +143,6 @@ export class ProductEffects {
                 ProductActions.successUpdateProducts
             ),
             tap((_) => {
-                console.log("Stop Loading")
                 this._commonFacade.unsetLoadingPage();
             }),
             switchMap((payload) =>
@@ -152,8 +150,8 @@ export class ProductEffects {
                     map((_) => {
                         return ProductActions.getProducts();
                     }),
-                    catchError((_) => {
-                        const error = { message: 'Ha ocurrido un error' };
+                    catchError((error) => {
+                        this._toastr.error('Error al recargar productos: ' + error.message);
                         return of(ProductActions.failureGetProducts({ error }));
                     })
                 )
@@ -170,7 +168,6 @@ export class ProductEffects {
                 ProductActions.failureGetProducts
             ),
             tap((_) => {
-                console.log("Stop Loading")
                 this._commonFacade.unsetLoadingPage();
             }),
         ),

@@ -20,3 +20,36 @@
     }
   }
 }
+
+.back-button-container {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 10px;
+}
+
+.back-button {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #2196f3;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: rgba(33, 150, 243, 0.1);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.back-arrow {
+  margin-right: 5px;
+  font-size: 18px;
+  font-style: normal;
+}

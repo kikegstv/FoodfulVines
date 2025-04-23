@@ -20,4 +20,24 @@ export class CommonFacade {
     public unsetLoadingPage() {
         this._store.dispatch(commonActions.stopLoading());
     }
+
+    public openModal(modalId: string, data?: any) {
+        this._store.dispatch(commonActions.openModal({ modalId, data }));
+    }
+
+    public closeModal(modalId: string) {
+        this._store.dispatch(commonActions.closeModal({ modalId }));
+    }
+
+    public closeAllModals() {
+        this._store.dispatch(commonActions.closeAllModals());
+    }
+
+    public getModalState(modalId: string): Observable<boolean> {
+        return this._store.select(commonSelectors.selectModalState(modalId));
+    }
+
+    public getModalData(modalId: string): Observable<any> {
+        return this._store.select(commonSelectors.selectModalData(modalId));
+    }
 }

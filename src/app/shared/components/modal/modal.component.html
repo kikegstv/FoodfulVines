@@ -1,5 +1,5 @@
-<div class="modal" *ngIf="isVisible" (click)="close()">
-  <div class="modal__content" (click)="$event.stopPropagation()">
+<div class="modal" *ngIf="isVisible">
+  <div class="modal__content">
     <ng-content></ng-content>
     <div class="modal__content__button__container">
       <img (click)="close()" class="modal__close-button" src="/assets/icons/actions/close.svg" alt="">

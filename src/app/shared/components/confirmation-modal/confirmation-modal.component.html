@@ -1,0 +1,20 @@
+<div class="confirmation-modal">
+  <div class="confirmation-modal__header">
+    <h2 class="confirmation-modal__title">{{ title }}</h2>
+  </div>
+  <div class="confirmation-modal__content">
+    <p class="confirmation-modal__message">{{ message }}</p>
+  </div>
+  <div class="confirmation-modal__actions">
+    <button
+      class="button button-cancel"
+      (click)="onCancel()">
+      {{ cancelText }}
+    </button>
+    <button
+      [ngClass]="['button', confirmButtonType === 'danger' ? 'button-danger' : 'button-primary']"
+      (click)="onConfirm()">
+      {{ confirmText }}
+    </button>
+  </div>
+</div>

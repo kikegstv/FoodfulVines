@@ -6,6 +6,7 @@ import { SpinnerComponent } from './components/spinner/spinner.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ModalComponent } from './components/modal/modal.component';
 import { RoleDirective } from './directives/role.directive';
+import { ConfirmationModalComponent } from './components/confirmation-modal/confirmation-modal.component';
 
 @NgModule({
   declarations: [
@@ -13,18 +14,20 @@ import { RoleDirective } from './directives/role.directive';
     FooterComponent,
     SpinnerComponent,
     ModalComponent,
-    RoleDirective
+    RoleDirective,
+    ConfirmationModalComponent
   ],
   imports: [
     CommonModule,
-    NgxSpinnerModule,
+    NgxSpinnerModule
   ],
   exports: [
     NavbarComponent,
     FooterComponent,
     SpinnerComponent,
     ModalComponent,
-    RoleDirective
+    RoleDirective,
+    ConfirmationModalComponent
   ]
 })
 export class SharedModule { }
